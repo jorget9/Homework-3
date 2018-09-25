@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Homework 3</title>
+
+    <style>
+      html, pre {
+        font-family: sans-serif;
+      }
+      body {
+        width: auto;
+        margin: 50px;
+      }
+      pre {
+        line-height: 1.5;
+        letter-spacing: 0.05rem;
+        padding: 1rem;
+      }
+      label {
+        width: 200px;
+        margin-right: 33px;
+      }
+      select {
+        width: 350px;
+        padding: 5px;
+      }
+      img{
+        width: 200px;
+        height:200px;
+        margin-bottom: 25px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Homework 3</h1>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Jordan_Lipofsky.jpg/170px-Jordan_Lipofsky.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Lebron_wizards_2017_%28cropped%29.jpg/240px-Lebron_wizards_2017_%28cropped%29.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Kobe_Bryant_warming_up.jpg/220px-Kobe_Bryant_warming_up.jpg">
+
+   <form>
+      <label for="verse-choose">Choose a player</label>
+      <select id="verse-choose" name="verse-choose">
+        <option>Lebron</option>
+        <option>Jordan</option>
+        <option>Kobe</option>
+      </select>
+    </form>
+
+
+    <h2>Player Bio</h2>
+
+    <pre>
+
+    </pre>
+
+    <script>
+        
+
+        //takes the value from the select tag and the pre tag
+        var playerChoose = document.querySelector('select');
+        var bioDisplay = document.querySelector('pre');
+        
+        //uses the value from the select tag once the value changes and passes it through var player and updateDisplay is run
+        playerChoose.onchange = function() {
+          var player = playerChoose.value;
+          updateDisplay(player);
+        };   
+      
+        function updateDisplay(player) {
+          // the original value from the select tag is made into a url
+            player = player.toLowerCase();
+            var url = player + '.txt';
+          
+          //fetch takes the url 
+            fetch(url)
+            //create new response object then passes it to text promise and then sets bioDisplay to the text of the url 
+            .then(function(response) {response.text().then(function(text) {bioDisplay.textContent = text;});}); 
+
+        };
+    //displays lebron bio as it is preselected
+        updateDisplay('Lebron');
+        playerChoose.value = 'Lebron';  
+        
+    </script>
+  </body>
+</html>
